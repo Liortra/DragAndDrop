@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>847858181978-4aa3dc1mbpom4nmem6i12a3ujemi0rnt.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.847858181978-4aa3dc1mbpom4nmem6i12a3ujemi0rnt</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCp3Pf7UCp29xWrtg0pLcXxOiuoTN-o7EM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>847858181978</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.liortra.DragAndDrop</string>
+	<key>PROJECT_ID</key>
+	<string>draganddrop-2c15a</string>
+	<key>STORAGE_BUCKET</key>
+	<string>draganddrop-2c15a.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:847858181978:ios:c10757a215b7cc4c5e3563</string>
+	<key>DATABASE_URL</key>
+	<string>https://draganddrop-2c15a.firebaseio.com</string>
+</dict>
+</plist>
