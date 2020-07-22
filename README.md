@@ -11,6 +11,10 @@ I hope you enjoy the project.
 **Comment to gyy**
 
 I add photos of the app in PhotoApp folder and video clips of the app in Media folder.
+
 Hope you enjoy.
+
 Thanks.
+
+## About the app
 
