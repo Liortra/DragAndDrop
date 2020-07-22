@@ -43,15 +43,6 @@ class LoginViewController: UIViewController {
         errorLabel.alpha = 1
     }
     
-    func transitionToHome(){
-        let homeViewController =
-            storyboard?.instantiateViewController(withIdentifier: Constants.Storyboard.homeViewController) as? BoardCollectionViewController
-        
-        view.window?.rootViewController = homeViewController
-        view.window?.makeKeyAndVisible()
-    }
-    
-
     //MARK:- login button
     @IBAction func loginTapped(_ sender: Any) {
         // Vaildate text fields
@@ -70,7 +61,9 @@ class LoginViewController: UIViewController {
                     self.showError(error!.localizedDescription)
                 }
                 else{
-                    self.transitionToHome()
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier:Constants.Segue.Segue_toMain, sender: nil)
+                    }
                 }
             }
         }

@@ -14,12 +14,16 @@
 		8BA3399C21E0F8FB007327D3 /* BoardCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA3399B21E0F8FB007327D3 /* BoardCollectionViewController.swift */; };
 		8BA3399E21E23857007327D3 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA3399D21E23857007327D3 /* Board.swift */; };
 		8BA339A021E23879007327D3 /* BoardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA3399F21E23879007327D3 /* BoardCollectionViewCell.swift */; };
+		CA0D201C24C83BF50083EEF9 /* DragAndDropLogin.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CA0D201924C83BF30083EEF9 /* DragAndDropLogin.mp4 */; };
+		CA0D201D24C83BF50083EEF9 /* DragAndDropLogo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CA0D201A24C83BF40083EEF9 /* DragAndDropLogo.mp4 */; };
+		CA0D201E24C83BF50083EEF9 /* DragAndDropSignUp.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CA0D201B24C83BF50083EEF9 /* DragAndDropSignUp.mp4 */; };
 		CA0D9A2D24C3990E00D18133 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CA0D9A2C24C3990E00D18133 /* GoogleService-Info.plist */; };
 		CA0D9A3124C39C4E00D18133 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0D9A2E24C39C4C00D18133 /* ViewController.swift */; };
 		CA0D9A3224C39C4E00D18133 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0D9A2F24C39C4D00D18133 /* SignUpViewController.swift */; };
 		CA0D9A3324C39C4E00D18133 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0D9A3024C39C4E00D18133 /* LoginViewController.swift */; };
 		CA0D9A3624C39C5C00D18133 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0D9A3424C39C5B00D18133 /* Constants.swift */; };
 		CA0D9A3724C39C5C00D18133 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0D9A3524C39C5C00D18133 /* Utilities.swift */; };
+		CA847DA024C596AF00FC38C9 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA847D9F24C596AF00FC38C9 /* Database.swift */; };
 		CA902D1224C440FB002A42B1 /* Kanban.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CA902D1124C440FB002A42B1 /* Kanban.mp4 */; };
 		F5CB007913FFC8DC79F33C14 /* Pods_DragAndDrop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C264A82B20E6A258F8D9318 /* Pods_DragAndDrop.framework */; };
 /* End PBXBuildFile section */
@@ -37,12 +41,16 @@
 		8BA3399F21E23879007327D3 /* BoardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCollectionViewCell.swift; sourceTree = "<group>"; };
 		9C264A82B20E6A258F8D9318 /* Pods_DragAndDrop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DragAndDrop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCF1ADBF50C4EA33F00820DE /* Pods-DragAndDrop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DragAndDrop.debug.xcconfig"; path = "Target Support Files/Pods-DragAndDrop/Pods-DragAndDrop.debug.xcconfig"; sourceTree = "<group>"; };
+		CA0D201924C83BF30083EEF9 /* DragAndDropLogin.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = DragAndDropLogin.mp4; sourceTree = "<group>"; };
+		CA0D201A24C83BF40083EEF9 /* DragAndDropLogo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = DragAndDropLogo.mp4; sourceTree = "<group>"; };
+		CA0D201B24C83BF50083EEF9 /* DragAndDropSignUp.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = DragAndDropSignUp.mp4; sourceTree = "<group>"; };
 		CA0D9A2C24C3990E00D18133 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CA0D9A2E24C39C4C00D18133 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CA0D9A2F24C39C4D00D18133 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		CA0D9A3024C39C4E00D18133 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CA0D9A3424C39C5B00D18133 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CA0D9A3524C39C5C00D18133 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		CA847D9F24C596AF00FC38C9 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		CA902D1124C440FB002A42B1 /* Kanban.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Kanban.mp4; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -135,6 +143,7 @@
 			children = (
 				CA0D9A3424C39C5B00D18133 /* Constants.swift */,
 				CA0D9A3524C39C5C00D18133 /* Utilities.swift */,
+				CA847D9F24C596AF00FC38C9 /* Database.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -143,6 +152,9 @@
 			isa = PBXGroup;
 			children = (
 				CA902D1124C440FB002A42B1 /* Kanban.mp4 */,
+				CA0D201924C83BF30083EEF9 /* DragAndDropLogin.mp4 */,
+				CA0D201A24C83BF40083EEF9 /* DragAndDropLogo.mp4 */,
+				CA0D201B24C83BF50083EEF9 /* DragAndDropSignUp.mp4 */,
 			);
 			path = Media;
 			sourceTree = "<group>";
@@ -208,9 +220,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA0D201E24C83BF50083EEF9 /* DragAndDropSignUp.mp4 in Resources */,
+				CA0D201C24C83BF50083EEF9 /* DragAndDropLogin.mp4 in Resources */,
 				CA902D1224C440FB002A42B1 /* Kanban.mp4 in Resources */,
 				8BA3399421E0BA69007327D3 /* LaunchScreen.storyboard in Resources */,
 				CA0D9A2D24C3990E00D18133 /* GoogleService-Info.plist in Resources */,
+				CA0D201D24C83BF50083EEF9 /* DragAndDropLogo.mp4 in Resources */,
 				8BA3399121E0BA69007327D3 /* Assets.xcassets in Resources */,
 				8BA3398F21E0BA68007327D3 /* Main.storyboard in Resources */,
 			);
@@ -273,6 +288,7 @@
 				8BA3399C21E0F8FB007327D3 /* BoardCollectionViewController.swift in Sources */,
 				CA0D9A3724C39C5C00D18133 /* Utilities.swift in Sources */,
 				8BA3398A21E0BA68007327D3 /* AppDelegate.swift in Sources */,
+				CA847DA024C596AF00FC38C9 /* Database.swift in Sources */,
 				CA0D9A3624C39C5C00D18133 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

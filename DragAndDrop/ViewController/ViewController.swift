@@ -8,11 +8,14 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var exitButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setUpElements()
+//        Database.addNewData()
+        
     }
     
    override func viewWillAppear(_ animated: Bool) {
@@ -20,12 +23,12 @@ class ViewController: UIViewController {
         setUpVideo()
     }
     
-    
     //MARK:- helper func
     func setUpElements(){
         // Style the elements
-        Utilities.styleFilledButton(signUpButton)
-        Utilities.styleHollowButton(loginButton)
+        Utilities.styleFilledButton(loginButton)
+        Utilities.styleHollowButton(signUpButton)
+        Utilities.styleHollowButton(exitButton)
     }
     
     func setUpVideo(){
@@ -51,10 +54,12 @@ class ViewController: UIViewController {
         videoPlayer?.isMuted = true
     }
     
-    
+    //MARK:- Buttons functions
     @IBAction func signUpTapped(_ sender: Any) {
     }
     @IBAction func loginTapped(_ sender: Any) {
     }
-    
+    @IBAction func exitTapped(_ sender: Any) {
+        exit(0)
+    }
 }

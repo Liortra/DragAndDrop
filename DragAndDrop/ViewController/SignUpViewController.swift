@@ -57,14 +57,6 @@ class SignUpViewController: UIViewController {
            errorLabel.text = message
            errorLabel.alpha = 1
        }
-       
-       func transitionToHome(){
-           let homeViewController =
-               storyboard?.instantiateViewController(withIdentifier: Constants.Storyboard.homeViewController) as? BoardCollectionViewController
-           
-           view.window?.rootViewController = homeViewController
-           view.window?.makeKeyAndVisible()
-       }
     
     //MARK:- sign Up button
     @IBAction func signUpTapped(_ sender: Any) {
@@ -87,17 +79,14 @@ class SignUpViewController: UIViewController {
                     self.showError("Error creating user")
                 }
                 else{
-                    let db = Firestore.firestore()
-                    db.collection("users").addDocument(data: ["firstName":firstName, "lastName":lastName, "uid":result!.user.uid]) { (error) in
-                        if error != nil{
-                            self.showError("Error saving user data")
-                        }
-                    }
+                    let message = Database.createUser(firstName: firstName, lastName: lastName, email: email)
                      // Transition to home screen
-                    self.transitionToHome()
+                    DispatchQueue.main.async {
+                    self.showError(message)
+                    self.performSegue(withIdentifier:Constants.Segue.Segue_toMain, sender: nil)
+                    }
                 }
             }
         }
-        
     }
 }

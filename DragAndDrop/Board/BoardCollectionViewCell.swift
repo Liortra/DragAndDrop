@@ -1,5 +1,6 @@
 import UIKit
 import MobileCoreServices
+import Firebase
 
 class BoardCollectionViewCell: UICollectionViewCell {
     
@@ -18,7 +19,6 @@ class BoardCollectionViewCell: UICollectionViewCell {
         tableView.dropDelegate = self
         
         tableView.tableFooterView = UIView()
-        
     }
     
     func setup(with data: Board) {
@@ -37,19 +37,24 @@ class BoardCollectionViewCell: UICollectionViewCell {
             guard let data = self.board else {
                 return
             }
-            
             data.items.append(text)
-            let addedIndexPath = IndexPath(item: data.items.count - 1, section: 0)
-            
-            self.tableView.insertRows(at: [addedIndexPath], with: .automatic)
-            self.tableView.scrollToRow(at: addedIndexPath, at: UITableView.ScrollPosition.bottom, animated: true)
+            Database.setBoard(board: data) { (success) in
+                  DispatchQueue.main.async {
+                if success! {
+                            self.tableView.reloadData()
+                }
+                else {
+                    data.items.removeLast()
+                }
+                }
+            }
         }))
-        
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         parentVC?.present(alertController, animated: true, completion: nil)
     }
 }
 
+//MARK:- Extension
 extension BoardCollectionViewCell: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -72,9 +77,12 @@ extension BoardCollectionViewCell: UITableViewDataSource, UITableViewDelegate {
     
 }
 
+//MARK:- Extension
 extension BoardCollectionViewCell: UITableViewDragDelegate {
     
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        self.parentVC?.pickedUpIndex = indexPath.row
+        self.parentVC?.pickedUpBoard = self.board
         guard let board = board, let stringData = board.items[indexPath.row].data(using: .utf8) else {
             return []
         }
@@ -87,6 +95,8 @@ extension BoardCollectionViewCell: UITableViewDragDelegate {
     }
     
     func tableView(_ tableView: UITableView, dragSessionWillBegin session: UIDragSession) {
+        
+        
         self.parentVC?.setupRemoveBarButtonItem()
         self.parentVC?.navigationItem.rightBarButtonItem = nil
     }
@@ -98,6 +108,7 @@ extension BoardCollectionViewCell: UITableViewDragDelegate {
     
 }
 
+//MARK:- Extension
 extension BoardCollectionViewCell: UITableViewDropDelegate {
     
     func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
@@ -127,21 +138,58 @@ extension BoardCollectionViewCell: UITableViewDropDelegate {
                     
                 case (nil, .some(let destinationIndexPath)):
                     // Move data from a table to another table
-                    self.removeSourceTableData(localContext: coordinator.session.localDragSession?.localContext)
-                    self.tableView.beginUpdates()
-                    self.board?.items.insert(string, at: destinationIndexPath.row)
-                    self.tableView.insertRows(at: [destinationIndexPath], with: .automatic)
-                    self.tableView.endUpdates()
+                    let text = self.parentVC?.pickedUpBoard?.items[self.parentVC!.pickedUpIndex!]
+                    self.board?.items.insert(text!, at: destinationIndexPath.row)
+                    
+                    Database.setBoard(board: self.board!) { (success) in
+                        if success!{
+                            // now remove data from source data base
+                            self.parentVC?.pickedUpBoard?.items.remove(at: self.parentVC!.pickedUpIndex!)
+                            Database.setBoard(board: (self.parentVC?.pickedUpBoard!)!) { (success) in
+                                if success! {
+                                    self.parentVC!.reloadCollection()
+                                }
+                                else{
+                                    // add the text that we deleted
+                                    self.parentVC?.pickedUpBoard?.items.insert(text!, at: destinationIndexPath.row)
+                                }
+                            }
+                            
+                        }
+                        else{
+                            // remove the insert text
+                            self.board?.items.remove(at: destinationIndexPath.row)
+                        }
+                        self.tableView.reloadData()
+                    }
+                    print("move task")
                     break
                     
                     
                 case (nil, nil):
                     // Insert data from a table to another table
-                    self.removeSourceTableData(localContext: coordinator.session.localDragSession?.localContext)
-                    self.tableView.beginUpdates()
-                    self.board?.items.append(string)
-                    self.tableView.insertRows(at: [IndexPath(row: self.board!.items.count - 1 , section: 0)], with: .automatic)
-                    self.tableView.endUpdates()
+                    print("bug")
+                    let text = self.parentVC?.pickedUpBoard?.items[self.parentVC!.pickedUpIndex!]
+                    self.board?.items.insert(text!, at: self.parentVC!.pickedUpIndex!)
+                    Database.setBoard(board: self.board!) { (success) in
+                        if success!{
+                            // now remove data from source data base
+                            self.parentVC?.pickedUpBoard?.items.remove(at: self.parentVC!.pickedUpIndex!)
+                            Database.setBoard(board: (self.parentVC?.pickedUpBoard!)!) { (success) in
+                                if success! {
+                                    self.parentVC!.reloadCollection()
+                                }
+                                else{
+                                    // add the text that we deleted
+                                    self.parentVC?.pickedUpBoard?.items.insert(text!, at: self.parentVC!.pickedUpIndex!)
+                                }
+                            }
+                        }
+                        else{
+                            
+                        }
+                        self.tableView.reloadData()
+                    }
                     break
                     
                 default: break

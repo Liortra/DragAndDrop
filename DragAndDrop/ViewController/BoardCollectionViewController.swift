@@ -3,22 +3,35 @@ import MobileCoreServices
 
 class BoardCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    var boards = [
-        Board(title: "Todo", items: ["Database Migration", "Schema Design", "Storage Management", "Model Abstraction"]),
-        Board(title: "In Progress", items: ["Push Notification", "Analytics", "Machine Learning"]),
-        Board(title: "Done", items: ["System Architecture", "Alert & Debugging"])
-    ]
+    var boards : [Board] = []
+    
+    var pickedUpBoard : Board?
+    var pickedUpIndex : Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
         updateCollectionViewItem(with: view.bounds.size)
+        
+        Database.getUserBoardsData { (arr) in
+            if arr != nil {
+                for board in arr! {
+                    print(board.title)
+                    self.boards.append(board)
+                }
+                 self.collectionView.reloadData()
+            }
+        }
     }
     
+    //MARK:- Helper functions
     private func setupNavigationBar() {
         setupAddButtonItem()
     }
     
+    func reloadCollection(){
+        collectionView.reloadData()
+    }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
@@ -53,13 +66,21 @@ class BoardCollectionViewController: UICollectionViewController, UICollectionVie
             guard let text = alertController.textFields?.first?.text, !text.isEmpty else {
                 return
             }
-            
-            self.boards.append(Board(title: text, items: []))
-            
-            let addedIndexPath = IndexPath(item: self.boards.count - 1, section: 0)
-            
-            self.collectionView.insertItems(at: [addedIndexPath])
-            self.collectionView.scrollToItem(at: addedIndexPath, at: UICollectionView.ScrollPosition.centeredHorizontally, animated: true)
+            let newBoard = Board(title: text, items: [])
+            Database.setBoard(board: newBoard) { (success) in
+                if success! {
+                    self.boards.append(newBoard)
+                    let addedIndexPath = IndexPath(item: self.boards.count - 1, section: 0)
+                    self.collectionView.insertItems(at: [addedIndexPath])
+                    self.collectionView.scrollToItem(at: addedIndexPath, at: UICollectionView.ScrollPosition.centeredHorizontally, animated: true)
+                }
+                else{
+                    // update user cant add board
+                    let errorController = UIAlertController (title: "Error", message: "user can't add board",preferredStyle: .alert)
+                    self.present(errorController, animated: true)
+                }
+            }
+        
         }))
         
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -80,6 +101,7 @@ class BoardCollectionViewController: UICollectionViewController, UICollectionVie
     
 }
 
+//MARK:- Extension
 extension BoardCollectionViewController: UIDropInteractionDelegate {
     
     func dropInteraction(_ interaction: UIDropInteraction, sessionDidUpdate session: UIDropSession) -> UIDropProposal {
@@ -95,10 +117,20 @@ extension BoardCollectionViewController: UIDropInteractionDelegate {
                 }
                 
                 if let (dataSource, sourceIndexPath, tableView) = session.localDragSession?.localContext as? (Board, IndexPath, UITableView) {
-                    tableView.beginUpdates()
-                    dataSource.items.remove(at: sourceIndexPath.row)
-                    tableView.deleteRows(at: [sourceIndexPath], with: .automatic)
-                    tableView.endUpdates()
+                    
+                    let selectedIndex = sourceIndexPath.row
+                    let text = dataSource.items[selectedIndex]
+                    
+                    dataSource.items.remove(at: selectedIndex)
+                    Database.setBoard(board: dataSource) { (success) in
+                        if success!{
+                            //doing nothing
+                        }
+                        else{
+                            dataSource.items.insert(text, at: selectedIndex)
+                        }
+                         tableView.reloadData()
+                    }
                 }
             }
         }
