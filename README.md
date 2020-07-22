@@ -22,5 +22,6 @@ Thanks.
 
 ## About the app
 
-<img src="PhotosApp/Logo.png" width="20" height="20">
+<img src="PhotosApp/Logo.png" width="100" height="100"> 
+The logo of the app
 
