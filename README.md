@@ -18,3 +18,5 @@ Thanks.
 
 ## About the app
 
+<img src="PhotoApp/Logo.png" width="200" height="200">
+
